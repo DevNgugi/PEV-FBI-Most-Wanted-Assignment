@@ -3,8 +3,26 @@ const logger = require('../utils/logger');
 
 async function getWantedList(req, res) {
   try {
-    const { page } = req.query;
-    const data = await fetchWantedList({ page });
+    const { page, title, sex, race, field_offices, status, reward_min, reward_max } = req.query;
+
+    const filters = {
+      title,
+      sex,
+      race,
+      field_offices,
+      status,
+      reward_min,
+      reward_max,
+    };
+
+    // Remove undefined/null filters
+    Object.keys(filters).forEach((key) => {
+      if (filters[key] == null || filters[key] === '') {
+        delete filters[key];
+      }
+    });
+
+    const data = await fetchWantedList({ page, filters });
 
     res.json({ success: true, data });
   } catch (err) {
@@ -16,7 +34,7 @@ async function getWantedList(req, res) {
 async function getWantedDetail(req, res) {
   try {
     const { id } = req.params;
-    
+
     const data = await fetchPersonById(id);
 
     if (!data) {

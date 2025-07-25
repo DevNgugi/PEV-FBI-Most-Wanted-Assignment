@@ -7,9 +7,10 @@ const WANTED_API_URL = `${process.env.FBI_API_BASE_URL}/${process.env.WANTED_END
 const PERSON_API_URL = `${process.env.FBI_API_BASE_URL}/${process.env.PERSON_ENDPOINT}`;
 
 const api = createHttpClient(WANTED_API_URL);
-async function fetchWantedList({ page = 1 }) {
+async function fetchWantedList({ page = 1, filters = {} }) {
   const params = {
     page,
+    ...filters,
   };
 
   try {
