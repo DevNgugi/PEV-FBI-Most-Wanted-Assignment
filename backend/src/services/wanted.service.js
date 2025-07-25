@@ -1,6 +1,7 @@
 const createHttpClient = require('../utils/apiClient');
 const redisHelper = require('../utils/redisHelper');
 const logger = require('../utils/logger');
+const WantedPersonDTO = require('../dtos/wantedPersonDTO');
 
 const API_URL = `${process.env.FBI_API_BASE_URL}/list`;
 
@@ -9,6 +10,7 @@ async function fetchWantedList({ page = 1 }) {
   const params = {
     page,
   };
+  
   try {
     return redisHelper('list', params, async () => {
       const response = await api.get(API_URL, { params });

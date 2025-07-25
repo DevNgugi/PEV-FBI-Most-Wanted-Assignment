@@ -1,5 +1,6 @@
 const striptags = require('striptags');
 
+
 class WantedPersonDTO {
   constructor(data) {
     this.id = data.uid;
