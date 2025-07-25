@@ -19,11 +19,13 @@
     "ioredis": "^5.6.1",
     "node-cache": "^5.1.2",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "jest": "^30.0.5",
     "nodemon": "^3.1.10",
+    "prettier": "3.6.2",
     "supertest": "^7.1.4"
   }
 }
