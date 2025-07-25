@@ -35,6 +35,9 @@ async function fetchPersonById(id) {
       return WantedPersonDTO.fromApi(response.data);
     });
   } catch (error) {
+      if (err.response && err.response.status === 404) {
+      return null;
+    }
     logger.error(`FBI fetch failed: ${error.message}`);
   }
 }
