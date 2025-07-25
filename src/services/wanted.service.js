@@ -1,4 +1,3 @@
-const axios = require('axios');
 const createHttpClient = require('../utils/apiClient');
 
 const FBI_API_URL =  `${process.env.FBI_WANTED_API_BASE}/list`;
