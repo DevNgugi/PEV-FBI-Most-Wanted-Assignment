@@ -24,12 +24,8 @@
 
       <div>
         <label class="block mb-1 text-sm">Field Office</label>
-        <input
-          v-model="filters.field_offices"
-          type="text"
-          placeholder="e.g. newyork"
-          class="w-full rounded-md bg-gray-800 text-white border border-gray-600 p-2"
-        />
+        <input v-model="filters.field_offices" type="text" placeholder="e.g. newyork"
+          class="w-full rounded-md bg-gray-800 text-white border border-gray-600 p-2" />
       </div>
 
       <div>
@@ -44,34 +40,23 @@
 
       <div>
         <label class="block mb-1 text-sm">Reward Min</label>
-        <input
-          v-model="filters.reward_min"
-          type="number"
-          class="w-full rounded-md bg-gray-800 text-white border border-gray-600 p-2"
-        />
+        <input v-model="filters.reward_min" type="number"
+          class="w-full rounded-md bg-gray-800 text-white border border-gray-600 p-2" />
       </div>
 
       <div>
         <label class="block mb-1 text-sm">Reward Max</label>
-        <input
-          v-model="filters.reward_max"
-          type="number"
-          class="w-full rounded-md bg-gray-800 text-white border border-gray-600 p-2"
-        />
+        <input v-model="filters.reward_max" type="number"
+          class="w-full rounded-md bg-gray-800 text-white border border-gray-600 p-2" />
       </div>
     </div>
 
     <div class="flex justify-end gap-4 mt-4">
-      <button
-        @click="onReset"
-        class="px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition text-sm"
-      >
+      <button @click="onReset" class="px-4 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition text-sm">
         Reset
       </button>
-      <button
-        @click="onSearch"
-        class="px-4 py-2 rounded-md bg-accent hover:bg-red-700 text-white transition text-sm"
-      >
+      <button @click="onSearch"
+        class="cursor-pointer px-4 py-2 rounded-md bg-accent hover:bg-red-700 text-white transition text-sm">
         Search
       </button>
     </div>
@@ -93,6 +78,7 @@ const filters = reactive({
 });
 
 function onSearch() {
+  
   emit('search', { ...filters });
 }
 

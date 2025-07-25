@@ -27,7 +27,7 @@
             FBI Most Wanted
           </h1>
         </div>
-        <FilterPanel @update="handleFilterUpdate" />
+        <FilterPanel @search="handleFilterUpdate" />
       </aside>
 
       <!-- Main Content -->
@@ -56,7 +56,7 @@
               </svg>
             </button>
           </div>
-          <FilterPanel @update="handleFilterUpdate" />
+          <FilterPanel @search="handleFilterUpdate" />
         </div>
         <div class="flex-1" @click="showSidebar = false"></div>
       </div>
@@ -95,11 +95,14 @@ watch(filters, () => {
 }, { deep: true });
 
 // Triggered by FilterPanel emit
+
 function handleFilterUpdate(newFilters) {
+  console.log(newFilters)
   store.setFilters(newFilters);
   store.setPage(1);
   showSidebar.value = false;
 }
+
 
 // Pagination
 function handlePageChange(newPage) {
