@@ -12,7 +12,7 @@ app.use('/api/v1/wanted', wantedRoutes);
 
 // Health Check
 app.get('/api/v1/healthz', (req, res) => {
-//wip: to add more app health check logic
+  //wip: to add more app health check logic
   res.status(200).json({ status: 'OK' });
 });
 

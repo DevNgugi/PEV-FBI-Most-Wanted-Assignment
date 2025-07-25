@@ -1,6 +1,5 @@
 const striptags = require('striptags');
 
-
 class WantedPersonDTO {
   constructor(data) {
     this.id = data.uid;
@@ -20,6 +19,9 @@ class WantedPersonDTO {
 
   static fromApiArray(items = []) {
     return items.map((item) => new WantedPersonDTO(item));
+  }
+  static fromApi(data) {
+    return new WantedPersonDTO(data);
   }
 }
 

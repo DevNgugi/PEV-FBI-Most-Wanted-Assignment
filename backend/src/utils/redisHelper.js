@@ -1,7 +1,7 @@
 const redis = require('../config/redis');
 const crypto = require('crypto');
 
-async function redisHelper(prefix, params, fetchFn, ttl = process.env.CACHE_TTL) {
+async function redisHelper(prefix, params = {}, fetchFn, ttl = process.env.CACHE_TTL) {
   const key = `${prefix}:${crypto.createHash('md5').update(JSON.stringify(params)).digest('hex')}`;
 
   const cached = await redis.get(key);

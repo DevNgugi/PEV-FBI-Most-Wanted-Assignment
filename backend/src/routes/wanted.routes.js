@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getWantedList } = require('../controllers/wanted.controller');
+const { getWantedList, getWantedDetail } = require('../controllers/wanted.controller');
 
-router.get('/', getWantedList); // GET /api/wanted
+router.get('/', getWantedList);
+router.get('/:id', getWantedDetail);
 
 module.exports = router;
