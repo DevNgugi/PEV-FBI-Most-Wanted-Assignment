@@ -1,17 +1,18 @@
-// src/utils/axiosFBI.js
 const axios = require('axios');
-
 //We have to add headers (e.g Mozilla as below otherwise the FBI api is returning 403)
 function createHttpClient(baseURL, customHeaders = {}) {
-  return axios.create({
+  const instance = axios.create({
     baseURL,
-    timeout: 5000,
+    timeout: parseInt(process.env.API_TIMEOUT || '10000', 10),
     headers: {
       'User-Agent': 'Mozilla/5.0',
-      'Accept': 'application/json',
+      Accept: 'application/json',
       ...customHeaders,
     },
   });
+
+
+  return instance;
 }
 
 module.exports = createHttpClient;
