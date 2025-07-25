@@ -82,7 +82,6 @@ const showSidebar = ref(false);
 
 onMounted(() => {
   store.fetchWantedList();
-
 });
 
 watch(page, () => {

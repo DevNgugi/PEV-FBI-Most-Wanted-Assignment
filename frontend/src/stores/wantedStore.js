@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import apiClient from '@/services/apiClient';
 
 export const useWantedStore = defineStore('wanted', {
   state: () => ({
@@ -15,6 +14,7 @@ export const useWantedStore = defineStore('wanted', {
       reward_min: '',
       reward_max: '',
     },
+    personDetail: null,
     loading: false,
     error: null,
   }),
@@ -26,13 +26,12 @@ export const useWantedStore = defineStore('wanted', {
 
       try {
         const params = { page: this.page, ...this.filters };
-
         // remove empty values
         Object.keys(params).forEach((key) => {
           if (params[key] === '' || params[key] === null) delete params[key];
         });
 
-        const res = await axios.get(`${BASE_URL}/wanted`, { params });
+        const res = await apiClient.get(`/wanted`, { params });
         this.results = res.data?.data?.results || [];
         this.total = res.data?.data?.total || 0;
       } catch (err) {
@@ -41,7 +40,15 @@ export const useWantedStore = defineStore('wanted', {
         this.loading = false;
       }
     },
-
+    async fetchPersonById(id) {
+      try {
+        const res = await apiClient.get(`/wanted/${id}`);
+        this.personDetail = res.data.data;
+      } catch (err) {
+        console.error('Error fetching person by ID:', err);
+        return null;
+      }
+    },
     setPage(page) {
       this.page = page;
       this.fetchWantedList();
