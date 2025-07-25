@@ -2,7 +2,7 @@
   <div class="bg-primary text-white p-4 rounded-2xl shadow-md space-y-4">
     <h2 class="text-xl font-bold border-b border-gray-700 pb-2">Filter Wanted List</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 gap-4">
       <div>
         <label class="block mb-1 text-sm">Sex</label>
         <select v-model="filters.sex" class="w-full rounded-md bg-gray-800 text-white border border-gray-600 p-2">

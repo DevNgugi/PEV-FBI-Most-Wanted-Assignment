@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useWantedStore = defineStore('wanted', {
   state: () => ({
@@ -31,8 +32,7 @@ export const useWantedStore = defineStore('wanted', {
           if (params[key] === '' || params[key] === null) delete params[key];
         });
 
-        const res = await axios.get('/api/wanted', { params });
-
+        const res = await axios.get(`${BASE_URL}/wanted`, { params });
         this.results = res.data?.data?.results || [];
         this.total = res.data?.data?.total || 0;
       } catch (err) {
