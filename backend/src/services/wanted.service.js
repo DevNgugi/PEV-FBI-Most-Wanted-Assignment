@@ -12,7 +12,11 @@ async function fetchWantedList({ page = 1 }) {
   try {
     return redisHelper('list', params, async () => {
       const response = await api.get(API_URL, { params });
-      return response.data;
+      return {
+        total: response.data.total,
+        page,
+        results: WantedPersonDTO.fromApiArray(response.data.items),
+      };
     });
   } catch (error) {
     logger.error(`FBI fetch failed: ${error.message}`);
