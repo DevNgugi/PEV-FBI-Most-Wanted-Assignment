@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi } from 'vitest';
 import { createTestingPinia } from '@pinia/testing';
 import WantedList from '@/views/WantedList.vue';
+import { useWantedStore } from '@/stores/wantedStore';
 
 // Mock PersonCard
 vi.mock('@/components/PersonCard.vue', () => ({
@@ -38,5 +39,29 @@ describe('WantedList.vue', () => {
 
     const cards = wrapper.findAllComponents({ name: 'PersonCard' });
     expect(cards.length).toBe(3);
+  });
+});
+
+describe('WantedList.vue', () => {
+  it('calls fetchWantedList on mount', () => {
+    const fetchWantedList = vi.fn();
+
+    mount(WantedList, {
+      global: {
+        plugins: [
+          createTestingPinia({
+            stubActions: false,
+            createSpy: vi.fn,
+          }),
+        ],
+      },
+    });
+
+    const store = useWantedStore();
+    store.fetchWantedList = fetchWantedList;
+
+    store.fetchWantedList();
+
+    expect(fetchWantedList).toHaveBeenCalled();
   });
 });
