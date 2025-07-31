@@ -1,4 +1,6 @@
 const axios = require('axios');
+const axiosRetry = require('axios-retry').default;
+
 //We have to add headers (e.g Mozilla as below otherwise the FBI api is returning 403)
 function createHttpClient(baseURL, customHeaders = {}) {
   const instance = axios.create({
@@ -11,6 +13,20 @@ function createHttpClient(baseURL, customHeaders = {}) {
     },
   });
 
+  axiosRetry(instance, {
+    retries: 3,
+    retryDelay: axiosRetry.exponentialDelay,
+    retryCondition: (error) => {
+      return (
+        axiosRetry.isNetworkOrIdempotentRequestError(error) ||
+        error.code === 'ECONNABORTED' || // timeout
+        (error.response && error.response.status >= 500)
+      );
+    },
+    onRetry: (retryCount, error, requestConfig) => {
+      console.warn(`[Retry #${retryCount}] ${requestConfig.method.toUpperCase()} ${requestConfig.url}`);
+    },
+  });
 
   return instance;
 }

@@ -8,7 +8,7 @@ it('should return list of wanted persons', async () => {
   const res = await request(baseURL).get('/api/v1/wanted');
   expect(res.statusCode).toBe(200);
   const results = res.body.data.results
-  expect(Array.isArray(results)).toBe(true); // ✅ Check results property
+  expect(Array.isArray(results)).toBe(true); //
   if (results.length) {
     expect(results[0]).toHaveProperty('title');
     expect(results[0]).toHaveProperty('id');
